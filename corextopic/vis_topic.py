@@ -22,6 +22,8 @@ from nltk.stem.snowball import *
 pattern = '\\b[A-Za-z]+\\b'
 np.seterr(all='ignore')
 
+OUTPUT_TOPIC_WORDS = 1000
+
 
 def vis_rep(corex, data=None, row_label=None, column_label=None, prefix='topics'):
     """Various visualizations and summary statistics for a one layer representation"""
@@ -184,7 +186,7 @@ def output_groups(tcs, alpha, mis, column_label, direction, thresh=0, prefix='')
                 mis[j, ind], alpha[j, ind], mis[j, ind] * alpha[j, ind]))
         #h.write(unicode(j) + u':' + u','.join([annotate(column_label[ind], direction[j,ind]) for ind in inds[:10]]) + u'\n')
         h.write(str(j) + u':' + u','.join(
-            [annotate(column_label[ind], direction[j, ind]) for ind in inds[:10]]) + u'\n')
+            [annotate(column_label[ind], direction[j, ind]) for ind in inds[:OUTPUT_TOPIC_WORDS]]) + u'\n')
     f.close()
     h.close()
 

@@ -176,7 +176,7 @@ class Corex(object):
         p_y_given_x = np.random.random((self.n_samples, self.n_hidden))
         if anchors is not None:
             for j, a in enumerate(anchors):
-                p_y_given_x[:, j] = 0.5 * p_y_given_x[:, j] + 0.5 * X[:, a].mean(axis=1).A1  # Assumes X is a binary matrix
+                p_y_given_x[:, j] = 0.5 * p_y_given_x[:, j] + 0.5 * X[:, a].mean(axis=1).flatten()  # Assumes X is a binary matrix
 
         for nloop in range(self.max_iter):
             if nloop > 1:
@@ -363,10 +363,10 @@ class Corex(object):
                 # Update anchors with new anchor list
                 if len(new_anchor_list) == 0:
                     continue
-                if len(new_anchor_list) == 1:
-                    processed_anchors.append(new_anchor_list[0])
-                else:
-                    processed_anchors.append(new_anchor_list)
+                # if len(new_anchor_list) == 1:
+                #     processed_anchors.append(new_anchor_list[0])
+                # else:
+                processed_anchors.append(new_anchor_list)
 
         return processed_anchors
 
